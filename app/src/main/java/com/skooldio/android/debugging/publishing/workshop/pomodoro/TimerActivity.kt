@@ -29,7 +29,7 @@ class TimerActivity : AppCompatActivity() {
         ActivityTimerBinding.inflate(layoutInflater)
     }
 
-    private lateinit var config: Config
+    private var config: Config? = null
 
     private val pomodoroCounter = PomodoroCounter()
 
@@ -42,7 +42,7 @@ class TimerActivity : AppCompatActivity() {
     }
 
     private fun restoreBundle() {
-//        config = intent.getParcelableExtra(EXTRA_CONFIG)
+        config = intent.getParcelableExtra(EXTRA_CONFIG)
     }
 
     private fun setupView() {
@@ -64,18 +64,20 @@ class TimerActivity : AppCompatActivity() {
     }
 
     private fun setupPomodoroCounter() {
-        pomodoroCounter.apply {
-            config(
-                workDuration = config.workDuration,
-                shortBreakDuration = config.shortBreakDuration,
-                longBreakDuration = config.longBreakDuration
-            )
-            setListener(
-                onReady = { minute, second -> updateCounterStatus(State.Ready, minute, second) },
-                onWork = { minute, second -> updateCounterStatus(State.Work, minute, second) },
-                onShortBreak = { minute, second -> updateCounterStatus(State.ShortBreak, minute, second) },
-                onLongBreak = { minute, second -> updateCounterStatus(State.LongBreak, minute, second) }
-            )
+        config?.let { config ->
+            pomodoroCounter.apply {
+                config(
+                    workDuration = config.workDuration,
+                    shortBreakDuration = config.shortBreakDuration,
+                    longBreakDuration = config.longBreakDuration
+                )
+                setListener(
+                    onReady = { minute, second -> updateCounterStatus(State.Ready, minute, second) },
+                    onWork = { minute, second -> updateCounterStatus(State.Work, minute, second) },
+                    onShortBreak = { minute, second -> updateCounterStatus(State.ShortBreak, minute, second) },
+                    onLongBreak = { minute, second -> updateCounterStatus(State.LongBreak, minute, second) }
+                )
+            }
         }
     }
 
