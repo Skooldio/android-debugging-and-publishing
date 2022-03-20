@@ -43,6 +43,11 @@ class TimerActivity : AppCompatActivity() {
 
     private fun restoreBundle() {
 //        config = intent.getParcelableExtra(EXTRA_CONFIG)
+//            ?: Config(
+//                workDuration = 25,
+//                shortBreakDuration = 5,
+//                longBreakDuration = 25
+//            )
     }
 
     private fun setupView() {
