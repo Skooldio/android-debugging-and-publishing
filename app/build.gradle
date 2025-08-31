@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'com.skooldio.android.debugging.publishing.workshop.pomodoro'
-    compileSdk 33
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.skooldio.android.debugging.publishing.workshop.pomodoro"
         minSdk 10
-        targetSdk 33
+        targetSdk 36
         versionCode 1
         versionName "1.0"
 
